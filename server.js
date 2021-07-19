@@ -3,16 +3,39 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
 
-var cors = require('cors')
-
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
+
+var cors = require('cors')
 app.use(cors({
-  origin: "*"
+  origin: "*",
 })
 )
+
+const http = require('http');
+
+app.get('/data', function (req, res) {
+  http.get('http://device-ad-collector-route-hubble.192.168.99.111.nip.io/data', (resp) => {
+    let data = '';
+
+    // A chunk of data has been received.
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      // console.log(JSON.parse(data).explanation);
+      res.send(JSON.parse(data));
+    });
+
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+});
+
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
