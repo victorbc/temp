@@ -79,7 +79,7 @@ app.post('/save', function (req, res) {
         })
         .catch(error => {
             console.error(error)
-            res.status(400).send(error);
+            res.status(400).send(error.message);
         })
 });
 

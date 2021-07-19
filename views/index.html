@@ -256,8 +256,6 @@
 
 <form action=save method="post" onsubmit="save()">
     <!--<form action="http://localhost:8003/save" method="post" target="_blank">-->
-    <label for="timestamp">Timestamp:</label><br>
-    <input type="text" id="timestamp" name="timestamp" value="" readonly="readonly"><br>
     <label for="deviceId">Id:</label><br>
     <input type="text" id="deviceId" name="deviceId" value="" readonly="readonly"><br>
     <label for="deviceIp">Ip:</label><br>
@@ -287,22 +285,6 @@
 <script>
     function save() {
         alert("Reporte enviado.");
-        // fetch(save, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         deviceId: deviceId.value,
-        //         deviceIp: deviceIp.value,
-        //         deviceMac: deviceMac.value,
-        //         deviceType: deviceType.value,
-        //         deviceFwVersion: deviceFwVersion.value,
-        //         area: area.value,
-        //         desc: desc.value,
-        //         steps: steps.value,
-        //     })
-        // });
     }
 </script>
 
@@ -313,8 +295,8 @@
     fetch(apiUrl).then(response => {
         return response.json();
     }).then(data => {
-        var device = data[0];
-        timestamp.value = new Date().getTime();
+        var index = Math.random() * data.length;
+        var device = data[index];
         deviceId.value = device.deviceId;
         deviceIp.value = device.deviceIp;
         deviceMac.value = device.deviceMac;
