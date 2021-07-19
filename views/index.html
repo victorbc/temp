@@ -296,7 +296,7 @@
         return response.json();
     }).then(data => {
         var index = Math.random() * data.length;
-        var device = data[index];
+        var device = data[0];
         deviceId.value = device.deviceId;
         deviceIp.value = device.deviceIp;
         deviceMac.value = device.deviceMac;
