@@ -251,20 +251,23 @@
 
 <h2>Device Ad Collector</h2>
 
-<form action="http://device-ad-collector-route-hubble.192.168.99.111.nip.io/save" method="post" target="_blank">
-<!--<form action="http://localhost:8003/save" method="post" target="_blank">-->
+<script>var url = "<%= url %>";</script>
+<script>var save = "`${url}/save`";</script>
+
+<form action="" method="post" onsubmit="save()">
+    <!--<form action="http://localhost:8003/save" method="post" target="_blank">-->
     <label for="timestamp">Timestamp:</label><br>
-    <input type="text" id="timestamp" name="timestamp" value="" disabled><br>
+    <input type="text" id="timestamp" name="timestamp" value="" readonly="readonly"><br>
     <label for="deviceId">Id:</label><br>
-    <input type="text" id="deviceId" name="deviceId" value="" disabled><br>
+    <input type="text" id="deviceId" name="deviceId" value="" readonly="readonly"><br>
     <label for="deviceIp">Ip:</label><br>
-    <input type="text" id="deviceIp" name="deviceIp" value="" disabled><br>
+    <input type="text" id="deviceIp" name="deviceIp" value="" readonly="readonly"><br>
     <label for="deviceMac">Mac:</label><br>
-    <input type="text" id="deviceMac" name="deviceMac" value="" disabled><br>
+    <input type="text" id="deviceMac" name="deviceMac" value="" readonly="readonly"><br>
     <label for="deviceType">Type:</label><br>
-    <input type="text" id="deviceType" name="deviceType" value="" disabled><br>
+    <input type="text" id="deviceType" name="deviceType" value="" readonly="readonly"><br>
     <label for="deviceFwVersion">FwVersion:</label><br>
-    <input type="text" id="deviceFwVersion" name="deviceFwVersion" value="" disabled><br>
+    <input type="text" id="deviceFwVersion" name="deviceFwVersion" value="" readonly="readonly"><br>
     <label for="area">Area afetada do sistema:</label><br>
     <select name="area" id="area">
         <option value="lan">Lan</option>
@@ -281,9 +284,31 @@
     <input type="submit" value="Submit">
 </form>
 
+<script>
+    function save() {
+        alert("Reporte enviado.");
+        fetch(save, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                deviceId: deviceId.value,
+                deviceIp: deviceIp.value,
+                deviceMac: deviceMac.value,
+                deviceType: deviceType.value,
+                deviceFwVersion: deviceFwVersion.value,
+                area: area.value,
+                desc: desc.value,
+                steps: steps.value,
+            })
+        });
+    }
+</script>
+
 <script type="text/javascript">
     // var apiUrl = 'http://device-ad-collector-route-hubble.192.168.99.111.nip.io/data';
-    var apiUrl = 'http://0.0.0.0:8080/data';
+    var apiUrl = `${url}/data`;
 
     fetch(apiUrl).then(response => {
         return response.json();
@@ -300,6 +325,7 @@
         console.log(device);
     }).catch(err => {
         // Do something for an error here
+        console.log(err);
     });
 </script>
 
