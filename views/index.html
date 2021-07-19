@@ -254,7 +254,7 @@
 <script>var url = "<%= url %>";</script>
 <script>var save = "`${url}/save`";</script>
 
-<form action="" method="post" onsubmit="save()">
+<form action=save method="post" onsubmit="save()">
     <!--<form action="http://localhost:8003/save" method="post" target="_blank">-->
     <label for="timestamp">Timestamp:</label><br>
     <input type="text" id="timestamp" name="timestamp" value="" readonly="readonly"><br>
@@ -287,22 +287,22 @@
 <script>
     function save() {
         alert("Reporte enviado.");
-        fetch(save, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                deviceId: deviceId.value,
-                deviceIp: deviceIp.value,
-                deviceMac: deviceMac.value,
-                deviceType: deviceType.value,
-                deviceFwVersion: deviceFwVersion.value,
-                area: area.value,
-                desc: desc.value,
-                steps: steps.value,
-            })
-        });
+        // fetch(save, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         deviceId: deviceId.value,
+        //         deviceIp: deviceIp.value,
+        //         deviceMac: deviceMac.value,
+        //         deviceType: deviceType.value,
+        //         deviceFwVersion: deviceFwVersion.value,
+        //         area: area.value,
+        //         desc: desc.value,
+        //         steps: steps.value,
+        //     })
+        // });
     }
 </script>
 
