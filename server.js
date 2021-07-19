@@ -9,10 +9,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 
 var cors = require('cors')
-app.use(cors({
-  origin: "*",
-})
-)
+app.use(cors())
 
 const http = require('http');
 
