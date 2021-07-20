@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Device Ad Collector</title>
+    <title>Bug Report Tool</title>
 
 
     <style>
@@ -268,6 +268,7 @@
     <input type="text" id="deviceFwVersion" name="deviceFwVersion" value="" readonly="readonly"><br>
     <label for="area">Area afetada do sistema:</label><br>
     <select name="area" id="area">
+        <option value="empty"></option>
         <option value="lan">Lan</option>
         <option value="wan">Wan</option>
         <option value="firewall">Firewall</option>
@@ -296,6 +297,7 @@
         return response.json();
     }).then(data => {
         var index = Math.random() * data.length;
+        console.log(index)
         var device = data[0];
         deviceId.value = device.deviceId;
         deviceIp.value = device.deviceIp;
