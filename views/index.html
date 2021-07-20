@@ -296,9 +296,9 @@
     fetch(apiUrl).then(response => {
         return response.json();
     }).then(data => {
-        var index = Math.random() * data.length;
+        var index = Math.floor(Math.random() * data.length);
         console.log(index)
-        var device = data[0];
+        var device = data[index];
         deviceId.value = device.deviceId;
         deviceIp.value = device.deviceIp;
         deviceMac.value = device.deviceMac;
